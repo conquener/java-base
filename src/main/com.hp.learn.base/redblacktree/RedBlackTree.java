@@ -2,6 +2,7 @@ package com.hp.learn.base.redblacktree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * declare
@@ -278,6 +279,8 @@ public class RedBlackTree {
 
     }
 
+   public  static AtomicInteger count = new AtomicInteger(0);
+
     /**
      * condition 2 节点为黑色 ，并且没有子节点
      *
@@ -304,6 +307,10 @@ public class RedBlackTree {
                 if (node.position.equals(NodePosition.left)) {
                     if (getColor(brother.rightNode).equals(NodeColor.red)) {
                         //2.2.1 节点的兄弟节点为黑色 并且 节点是左节点 兄弟节点的右子节点为红色
+                        NodeColor color = brother.color;
+                        brother.color = node.parentNode.color;
+                        node.parentNode.color = color;
+
                         brother.rightNode.color = NodeColor.black;
                         leftRotate(node.parentNode);
                         if (operator == 1) {
@@ -323,6 +330,10 @@ public class RedBlackTree {
                 } else {
                     if (getColor(brother.leftNode).equals(NodeColor.red)) {
                         //2.2.2节点的兄弟节点为黑色 并且 节点是右节点 兄弟节点的左子节点为红色
+                        NodeColor color = brother.color;
+                        brother.color = node.parentNode.color;
+                        node.parentNode.color = color;
+
                         brother.leftNode.color = NodeColor.black;
                         rightRotate(node.parentNode);
                         if (operator == 1) {

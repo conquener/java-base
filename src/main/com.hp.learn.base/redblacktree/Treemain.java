@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * declare
@@ -125,7 +126,6 @@ public class Treemain {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, width, height);
 
-
         g.setColor(Color.BLACK);
         g.drawLine(0, 0, 0, height);
         g.drawLine(0, 0, width, 0);
@@ -166,108 +166,11 @@ public class Treemain {
         }
     }
 
+
     static Integer insertData(RedBlackTree tree) {
-//        tree.insertNode(40);
-//        tree.insertNode(58);
-//        tree.insertNode(61);
-//        tree.insertNode(80);
-//        tree.insertNode(31);
-//        tree.insertNode(20);
-//        tree.insertNode(42);
-//        tree.insertNode(53);
+
 //        tree.insertNode(60);
 //        tree.insertNode(99);
-//        tree.insertNode(41);
-//        tree.insertNode(13);
-//        tree.insertNode(30);
-//        tree.insertNode(53);
-//        tree.insertNode(34);
-//        tree.insertNode(94);
-//        tree.insertNode(88);
-//        tree.insertNode(79);
-//        tree.insertNode(50);
-//        tree.insertNode(3);
-//        tree.insertNode(21);
-//        tree.insertNode(60);
-//        tree.insertNode(10);
-//        tree.insertNode(91);
-//        tree.insertNode(22);
-//        tree.insertNode(45);
-//        tree.insertNode(41);
-//        tree.insertNode(86);
-//        tree.insertNode(35);
-//        tree.insertNode(99);
-//        tree.insertNode(94);
-//        tree.insertNode(45);
-//        tree.insertNode(83);
-//        tree.insertNode(85);
-//        tree.insertNode(56);
-//        tree.insertNode(27);
-//        tree.insertNode(96);
-//        tree.insertNode(46);
-//        tree.insertNode(9);
-//        tree.insertNode(5);
-//        tree.insertNode(7);
-//        tree.insertNode(76);
-//        tree.insertNode(70);
-//        tree.insertNode(59);
-//        tree.insertNode(9);
-//        tree.insertNode(24);
-//        tree.insertNode(19);
-//        tree.insertNode(64);
-//        tree.insertNode(60);
-//        tree.insertNode(32);
-//        tree.insertNode(82);
-//        tree.insertNode(16);
-//        tree.insertNode(73);
-//        tree.insertNode(81);
-//        tree.insertNode(90);
-//        tree.insertNode(97);
-//        tree.insertNode(60);
-//        tree.insertNode(0);
-//        tree.insertNode(63);
-//        tree.insertNode(69);
-//        tree.insertNode(71);
-//        tree.insertNode(41);
-//        tree.insertNode(42);
-//        tree.insertNode(26);
-//        tree.insertNode(39);
-//        tree.insertNode(70);
-//        tree.insertNode(24);
-//        tree.insertNode(43);
-//        tree.insertNode(38);
-//        tree.insertNode(61);
-//        tree.insertNode(21);
-//        tree.insertNode(24);
-//        tree.insertNode(81);
-//        tree.insertNode(15);
-//        tree.insertNode(67);
-//        tree.insertNode(84);
-//        tree.insertNode(89);
-//        tree.insertNode(46);
-//        tree.insertNode(20);
-//        tree.insertNode(22);
-//        tree.insertNode(16);
-//        tree.insertNode(65);
-//        tree.insertNode(45);
-//        tree.insertNode(79);
-//        tree.insertNode(73);
-//        tree.insertNode(29);
-//        tree.insertNode(16);
-//        tree.insertNode(54);
-//        tree.insertNode(54);
-//        tree.insertNode(79);
-//        tree.insertNode(29);
-//        tree.insertNode(67);
-//        tree.insertNode(74);
-//        tree.insertNode(2);
-//        tree.insertNode(18);
-//        tree.insertNode(64);
-//        tree.insertNode(92);
-//        tree.insertNode(84);
-//        tree.insertNode(57);
-//        tree.insertNode(88);
-//
 //        tree.deleteNode(tree.queryNode(42).get(1));
 //        List<RedBlackNode> nodes = tree.queryNode(45);
 //        tree.deleteNode(nodes.get(1));
@@ -282,10 +185,9 @@ public class Treemain {
             tree.insertNode(j);
             System.out.println("tree.insertNode(" + j + ");");
         }
-
         drawTreeSelf(tree.root);
 
-        tree.deleteNode(tree.queryNode(3).get(0));
+      tree.deleteNode(tree.queryNode(3).get(0));
 
 
         return null;
