@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * declare
@@ -33,7 +34,7 @@ public class Treemain {
         //先序遍历二叉树
         travesty(tree.root);
         //输出先序遍历 检查二叉树
-        System.out.println(s.toString());
+        System.out.println("先序（前序）遍历二叉树：{" + s.toString() + "leaf==null}");
         printTree(tree.root, 1);
 
         int height = (treeMap.size() + 1) * 100;
@@ -96,7 +97,7 @@ public class Treemain {
         treeMap.clear();
     }
 
-
+    static AtomicInteger count = new AtomicInteger(0);
     volatile static Map<Integer, List<String>> treeMap = new HashMap<>();
 
     static void printTree(RedBlackNode node, Integer hierarchy) {
@@ -169,21 +170,10 @@ public class Treemain {
 
     static Integer insertData(RedBlackTree tree) {
 
-//        tree.insertNode(60);
-//        tree.insertNode(99);
-//        tree.deleteNode(tree.queryNode(42).get(1));
-//        List<RedBlackNode> nodes = tree.queryNode(45);
-//        tree.deleteNode(nodes.get(1));
-//
-//        tree.deleteNode(nodes.get(2));
-//
-//
-//        tree.deleteNode(tree.queryNode(43).get(0));
-
         for (int j = 1; j <= 32; j++) {
             //int value = Double.valueOf((Math.random() * 100)).intValue();
             tree.insertNode(j);
-            System.out.println("tree.insertNode(" + j + ");");
+            //System.out.println("tree.insertNode(" + j + ");");
         }
         drawTreeSelf(tree.root);
 
