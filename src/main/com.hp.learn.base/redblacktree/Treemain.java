@@ -151,9 +151,9 @@ public class Treemain {
         } else {
             g.setColor(Color.BLACK);
         }
-        Shape circular = new Ellipse2D.Double(x, y, 25, 25);
+        Shape circular = new Ellipse2D.Double(x - 10, y - 10, 25, 25);
         g.fill(circular);
-        g.drawString(node.value + (node.position == null ? "" : (node.position.equals(NodePosition.left) ? "L" : "R")), x, y);
+        g.drawString(node.value + (node.position == null ? "" : (node.position.equals(NodePosition.left) ? "L" : "R")), x-10, y-10);
 
         g.setColor(Color.BLACK);
 
@@ -170,15 +170,11 @@ public class Treemain {
 
     static Integer insertData(RedBlackTree tree) {
 
-        for (int j = 1; j <= 32; j++) {
-            //int value = Double.valueOf((Math.random() * 100)).intValue();
-            tree.insertNode(j);
+        for (int j = 0; j <= 105; j++) {
+            int value = Double.valueOf((Math.random() * 100)).intValue();
+            tree.insertNode(value);
             //System.out.println("tree.insertNode(" + j + ");");
         }
-        drawTreeSelf(tree.root);
-
-      tree.deleteNode(tree.queryNode(3).get(0));
-
 
         return null;
     }

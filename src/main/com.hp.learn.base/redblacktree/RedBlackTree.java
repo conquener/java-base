@@ -104,14 +104,22 @@ public class RedBlackTree {
                     rightRotate(node.parentNode);
                     node = node.rightNode;
                 }
+                //经过了上面的判断，能执行到这一步的 都是满足条件的
                 step2(node);
             }
         }
     }
 
+
+    /**
+     * 节点和父节点都在一个方向
+     * @param node
+     */
     void step2(RedBlackNode node) {
+
         RedBlackNode p = node.parentNode;
         RedBlackNode g = node.parentNode.parentNode;
+
         if (node.position.equals(NodePosition.left)) {
             //将node 进行右旋
             rightRotate(g);
@@ -152,6 +160,7 @@ public class RedBlackTree {
     }
 
     /**
+     * 为了方便撸代码，传入的参数均是父节点
      * 当前节点的 右子节点  左旋转
      * 旋转不变更颜色
      */
@@ -261,7 +270,7 @@ public class RedBlackTree {
 
 
     /**
-     * condition 1 节点为红色 ，并且没有子节点
+     * condition 1 节点为红色 ，并且没有子节点 不可能为根节点
      *
      * @param node
      */
@@ -293,7 +302,7 @@ public class RedBlackTree {
             RedBlackNode brother = getNeighbor(node);
 
             if (brother.color.equals(NodeColor.red)) {
-                //2.1.1节点的兄弟节点为红色
+                //3.2.1节点的兄弟节点为红色
                 node.parentNode.color = NodeColor.red;
                 brother.color = NodeColor.black;
                 if (node.position.equals(NodePosition.left)) {
@@ -306,7 +315,7 @@ public class RedBlackTree {
                 //  在当前节点 无子节点的情况下 兄弟节点 如果有黑色的子节点 ，只有可能是null节点
                 if (node.position.equals(NodePosition.left)) {
                     if (getColor(brother.rightNode).equals(NodeColor.red)) {
-                        //2.2.1 节点的兄弟节点为黑色 并且 节点是左节点 兄弟节点的右子节点为红色
+                        //3.2.2.1 节点的兄弟节点为黑色 并且 节点是左节点 兄弟节点的右子节点为红色
                         NodeColor color = brother.color;
                         brother.color = node.parentNode.color;
                         node.parentNode.color = color;
@@ -318,18 +327,18 @@ public class RedBlackTree {
                         }
                         return;
                     } else if (getColor(brother.leftNode).equals(NodeColor.red)) {
-                        //2.2.1 节点的兄弟节点为黑色 并且 节点是左节点 兄弟节点的右子节点为黑色 并且 左子节点为红色
+                        //3.2.2.2 节点的兄弟节点为黑色 并且 节点是左节点 兄弟节点的右子节点为黑色 并且 左子节点为红色
                         brother.color = NodeColor.red;
                         brother.leftNode.color = NodeColor.black;
                         rightRotate(brother);
-                        //递归调用 这时候 会回归到2.2.1的情况
+                        //递归调用 这时候 会回归到3.2.2.2的情况
                         condition2(node, operator);
                         return;
                     }
 
                 } else {
                     if (getColor(brother.leftNode).equals(NodeColor.red)) {
-                        //2.2.2节点的兄弟节点为黑色 并且 节点是右节点 兄弟节点的左子节点为红色
+                        //3.2.2.1节点的兄弟节点为黑色 并且 节点是右节点 兄弟节点的左子节点为红色
                         NodeColor color = brother.color;
                         brother.color = node.parentNode.color;
                         node.parentNode.color = color;
@@ -344,7 +353,7 @@ public class RedBlackTree {
                         brother.color = NodeColor.red;
                         brother.rightNode.color = NodeColor.black;
                         leftRotate(brother);
-                        //递归调用 这时候 会回归到2.2.1的情况
+                        //递归调用 这时候 会回归到3.2.2.1的情况
                         condition2(node, operator);
                         return;
                     }
@@ -352,7 +361,7 @@ public class RedBlackTree {
 
                 if (getColor(node.parentNode).equals(NodeColor.red)) {
                     //如果 父节点为红色 ，兄弟节点和 侄子节点 均为黑色  这里无需再判断兄弟节点，能执行到这里 说明全为黑色
-                    //直接将 兄弟节点 置为红色即可
+                    //直接将 兄弟节点 置为红色即可，父节点置黑
                     brother.color = NodeColor.red;
                     node.parentNode.color = NodeColor.black;
                     if (operator == 1) {
@@ -372,7 +381,10 @@ public class RedBlackTree {
             }
         } else {
             //如果node 是根节点 ，并且 没有子节点 ，那么直接移除即可
-            root = null;
+            if(operator == 1){
+                root = null;
+            }
+
 
         }
     }
@@ -500,12 +512,6 @@ public class RedBlackTree {
         } else {
             return null;
         }
-    }
-
-
-    void balanceOperator() {
-
-
     }
 
 
