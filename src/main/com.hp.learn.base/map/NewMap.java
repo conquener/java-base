@@ -294,21 +294,21 @@ public interface NewMap<K, V> {
      * @param newValue
      * @return
      */
-    default boolean replace(K key, V newValue) {
-        Object curValue = get(key);
+    default V replace(K key, V newValue) {
+        V curValue = get(key);
         // 一开始想不通 为什么 明明 containsKey(key) 这个条件判断的结果集 是 真包含 curValue == null 的 ,为什么要多此一举 判断curValue == null呢?
         // 这个想了一下, 为什么，因为执行速度， 对于 curValue 不等于null 的数据 ，curValue == null 条件 能够迅速判断出来结果 ，就不需要 整个map扫描
         //然后反思了自己以前的代码，是否有做这个方面的考虑呢？
         if (curValue != null || containsKey(key)) {
-            return false;
+            curValue = put(key, newValue);
         }
-        put(key, newValue);
-        return true;
+        return curValue;
     }
 
     /**
      * 如果 key 对应的值为null 那么设置为 指定方法计算的值 （map中键不存在,也会put值）
      * 如果不存在 则set0
+     *
      * @param key
      * @param mappingFunction
      * @return
@@ -352,7 +352,8 @@ public interface NewMap<K, V> {
 
     /**
      * 计算
-     *  如果key 对应的值存在 通过 定义的计算方法 计算出新的值， 如果计算的值为null，并且键存在 那么移除键
+     * 如果key 对应的值存在 通过 定义的计算方法 计算出新的值， 如果计算的值为null，并且键存在 那么移除键
+     *
      * @param key
      * @param remappingFunction
      * @return
@@ -376,6 +377,7 @@ public interface NewMap<K, V> {
 
     /**
      * merge 如果以前键 对应值存在 那么通过指定的方法 计算出新的值，值不存在 那么直接set为新的值（新的值为null时 ，移除key）
+     *
      * @param key
      * @param value
      * @param remappingFunction
